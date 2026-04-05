@@ -15,6 +15,7 @@ Each member of the team can earn **10 points**.
 - A function distributes **exactly 5 questions per player**, ensuring an equal number of questions across all difficulty levels.
 - A **question pool** of 30 questions is created and stored in a **JSON file**. The JSON file is loaded using **fetch and AJAX** for retrieving questions dynamically.
 
+
 ### **Task 2: Scoring Module (2 points) : Sophia **
 **The Team** will develop the **scoring system**, which should:
 - Assign points based on the difficulty of correctly answered questions (**Easy = 1, Medium = 2, Hard = 3**).
