@@ -2,36 +2,36 @@
   {
     "category": "Math",
     "question": "What is 2 + 2?",
-    "options": [2, 3, 4, 5],
-    "answer": 4,
+    "options": ["2", "3", "4", "5"],
+    "answer": "4",
     "difficulty": "easy"
   },
   {
     "category": "Math",
     "question": "What is 5 + 3?",
-    "options": [6, 7, 8, 9],
-    "answer": 8,
+    "options": ["6", "7", "8", "9"],
+    "answer": "8",
     "difficulty": "easy"
   },
   {
     "category": "Math",
     "question": "What is 10 - 4?",
-    "options": [5, 6, 7, 8],
-    "answer": 6,
+    "options": ["5", "6", "7", "8"],
+    "answer": "6",
     "difficulty": "easy"
   },
   {
     "category": "Math",
     "question": "What is 3 × 3?",
-    "options": [6, 8, 9, 12],
-    "answer": 9,
+    "options": ["6", "8", "9", "12"],
+    "answer": "9",
     "difficulty": "easy"
   },
   {
     "category": "Math",
     "question": "What is 12 ÷ 4?",
-    "options": [2, 3, 4, 6],
-    "answer": 3,
+    "options": ["2", "3", "4", "6"],
+    "answer": "3",
     "difficulty": "easy"
   },
   {
@@ -72,22 +72,22 @@
   {
     "category": "Math",
     "question": "What is 15 × 3?",
-    "options": [30, 35, 45, 50],
-    "answer": 45,
+    "options": ["30", "35", "45", "50"],
+    "answer": "45",
     "difficulty": "medium"
   },
   {
     "category": "Math",
     "question": "What is 144 ÷ 12?",
-    "options": [11, 12, 13, 14],
-    "answer": 12,
+    "options": ["11", "12", "13", "14"],
+    "answer": "12",
     "difficulty": "medium"
   },
   {
     "category": "Math",
     "question": "What is 7 squared?",
-    "options": [42, 47, 49, 56],
-    "answer": 49,
+    "options": ["42", "47", "49", "56"],
+    "answer": "49",
     "difficulty": "medium"
   },
   {
@@ -100,8 +100,8 @@
   {
     "category": "Science",
     "question": "How many bones are in the adult human body?",
-    "options": [198, 206, 214, 220],
-    "answer": 206,
+    "options": ["198", "206", "214", "220"],
+    "answer": "206",
     "difficulty": "medium"
   },
   {
@@ -121,8 +121,8 @@
   {
     "category": "History",
     "question": "In which year did World War II end?",
-    "options": [1943, 1944, 1945, 1946],
-    "answer": 1945,
+    "options": ["1943", "1944", "1945", "1946"],
+    "answer": "1945",
     "difficulty": "medium"
   },
   {
@@ -152,22 +152,22 @@
   {
     "category": "Math",
     "question": "What is the square root of 196?",
-    "options": [12, 13, 14, 15],
-    "answer": 14,
+    "options": ["12", "13", "14", "15"],
+    "answer": "14",
     "difficulty": "hard"
   },
   {
     "category": "Math",
     "question": "Solve: 3x + 5 = 20. What is x?",
-    "options": [3, 4, 5, 6],
-    "answer": 5,
+    "options": ["3", "4", "5", "6"],
+    "answer": "5",
     "difficulty": "hard"
   },
   {
     "category": "Math",
     "question": "What is 25% of 240?",
-    "options": [50, 55, 60, 65],
-    "answer": 60,
+    "options": ["50", "55", "60", "65"],
+    "answer": "60",
     "difficulty": "hard"
   },
   {
@@ -201,8 +201,8 @@
   {
     "category": "History",
     "question": "The fall of the Berlin Wall happened in which year?",
-    "options": [1987, 1988, 1989, 1990],
-    "answer": 1989,
+    "options": ["1987", "1988", "1989", "1990"],
+    "answer": "1989",
     "difficulty": "hard"
   },
   {

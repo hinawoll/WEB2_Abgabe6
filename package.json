@@ -1,0 +1,24 @@
+{
+  "name": "web2_abgabe6",
+  "version": "1.0.0",
+  "description": "The goal of this exercise is to develop a **multiple-choice quiz application** using modular development principles in TypeScript. Each team consists of **2 students** (maximum 3). Each team will focus on three core modules and collaborate on the final integration.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hinawoll/WEB2_Abgabe6.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/hinawoll/WEB2_Abgabe6/issues"
+  },
+  "homepage": "https://github.com/hinawoll/WEB2_Abgabe6#readme",
+  "devDependencies": {
+    "typescript": "^6.0.2"
+  }
+}
