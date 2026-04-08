@@ -11,16 +11,28 @@
   <div class="container mt-5">
     <div id="player-input" class="mb-4">
       <!-- Place the player name input here -->
+    <input type="text" class="form-control" placeholder="username" aria-label="username" id = "username">
+    <button id="startBtn" class="btn btn-primary mt-2">Start Quiz</button>
     </div>
     <div id="quiz-container" class="card" style="display: none;">
       <div class="card-body">
         <h1 class="card-title text-center">Quiz</h1>
         <!-- Place the question, the options and the results here -->
+        <h3 id="question"></h3>
+      <div id="options" class="mt-3"></div>
       </div>
     </div>
-    <div id="leaderboard" class="mt-5">
+
+    <div id="result" class="mt-4">
+      <h3 id = "score">Score:</h3> 
+      <ul id = "points"></ul>
+
+    </div>
+
+    <div id="leaderboarddiv" class="mt-5">
       <h2>Leaderboard</h2>
       <!-- Place the leaderboard list here -->
+       <ul id="leaderboard"></ul>
     </div>
   </div>
   <script type="module" src="dist/main.js"></script>

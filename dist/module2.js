@@ -1,6 +1,13 @@
 /*
 Punktebewertung: easy = 1, medium = 2, hard = 3, falsch = 0
 */
+{
+    category: string;
+    question: string;
+    options: string[];
+    answer: string;
+    difficulty: Difficulty;
+}
 function getPoints(difficulty, isCorrect) {
     if (!isCorrect)
         return 0;
@@ -17,7 +24,7 @@ function getMaxPoints(questions) {
     });
     return maxPoints;
 }
-export function calculateResult(playerName, questions, userAnswers) {
+export function calculateScore(playerName, questions, userAnswers) {
     let points = 0;
     let correctAnswers = 0;
     for (let i = 0; i < questions.length; i++) {
