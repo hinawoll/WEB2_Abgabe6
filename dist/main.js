@@ -4,9 +4,10 @@ let questions = [];
 let answers = [];
 let indexcount = 0;
 let playerName = "";
-function restartGame() {
+async function restartGame() {
     indexcount = 0;
     answers = [];
+    questions = getQuestionsForPlayer(await loadQuestions());
     document.getElementById("points").innerHTML = "";
     document.getElementById("leaderboard").innerHTML = "";
     document.getElementById("options").innerHTML = "";
@@ -41,21 +42,49 @@ export function displayQuestion(index) {
         Option.className = "btn btn-outline-primary btn-block mt-2";
         Option.textContent = option.toString();
         Option.addEventListener("click", () => {
-            handleAnswer(index, option.toString());
+            handleAnswer(index, option.toString(), Option);
         });
         document.getElementById("options").appendChild(Option);
     });
 }
-function handleAnswer(index, selectedOption) {
+/*function handleAnswer(index: number, selectedOption: string, button: HTMLButtonElement): void {
     answers[index] = selectedOption.toString();
+
     indexcount++;
+
     if (indexcount < questions.length) {
         displayQuestion(indexcount);
     }
-    else {
+    else
+    {
         const result = calculateScore(playerName, questions, answers);
         displayScore(result);
     }
+}*/
+function handleAnswer(index, selectedOption, button) {
+    document.querySelectorAll("#options button").forEach(btn => {
+        btn.disabled = true;
+    }); //keine weiteren buttons drückbar während feedback
+    answers[index] = selectedOption;
+    const isCorrect = questions[index].answer === selectedOption;
+    if (isCorrect) {
+        button.classList.remove("btn-outline-primary");
+        button.classList.add("btn-success");
+    }
+    else {
+        button.classList.remove("btn-outline-primary");
+        button.classList.add("btn-danger");
+    }
+    setTimeout(() => {
+        indexcount++;
+        if (indexcount < questions.length) {
+            displayQuestion(indexcount);
+        }
+        else {
+            const result = calculateScore(playerName, questions, answers);
+            displayScore(result);
+        }
+    }, 1200);
 }
 function displayScore(result) {
     const pointsList = document.getElementById("points");

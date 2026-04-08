@@ -6,18 +6,20 @@ let answers: string[] = [];
 let indexcount: number = 0;
 let playerName: string = "";
 
-function restartGame(): void {
+async function restartGame(): Promise<void> {
     indexcount = 0;
     answers = [];
+    questions = getQuestionsForPlayer(await loadQuestions());
+
     document.getElementById("points")!.innerHTML = "";
     document.getElementById("leaderboard")!.innerHTML = "";
     document.getElementById("options")!.innerHTML = "";
     document.getElementById("question")!.textContent = "";
-  
+
     document.getElementById("quiz-container")!.style.display = "none";
     document.getElementById("player-input")!.style.display = "block";
     document.getElementById("restartBtn")!.style.display = "none";
-  
+
     const input = document.getElementById("username") as HTMLInputElement;
     input.value = "";
 }
@@ -49,14 +51,14 @@ export function displayQuestion(index: number): void {
     Option.textContent = option.toString();
 
     Option.addEventListener("click", () => {
-        handleAnswer(index, option.toString());
+        handleAnswer(index, option.toString(), Option);
     });
 
     document.getElementById("options")!.appendChild(Option);
   });
 }
 
-function handleAnswer(index: number, selectedOption: string): void {
+/*function handleAnswer(index: number, selectedOption: string, button: HTMLButtonElement): void {
     answers[index] = selectedOption.toString();
 
     indexcount++;
@@ -69,6 +71,34 @@ function handleAnswer(index: number, selectedOption: string): void {
         const result = calculateScore(playerName, questions, answers);
         displayScore(result);
     }
+}*/
+
+function handleAnswer(index: number, selectedOption: string, button: HTMLButtonElement): void {
+    document.querySelectorAll("#options button").forEach(btn => {
+        (btn as HTMLButtonElement).disabled = true;
+    }); //keine weiteren buttons drückbar während feedback
+    answers[index] = selectedOption;
+
+    const isCorrect = questions[index].answer === selectedOption;
+
+    if (isCorrect) {
+        button.classList.remove("btn-outline-primary");
+        button.classList.add("btn-success");
+    } else {
+        button.classList.remove("btn-outline-primary");
+        button.classList.add("btn-danger");
+    }
+
+    setTimeout(() => {
+        indexcount++;
+
+        if (indexcount < questions.length) {
+            displayQuestion(indexcount);
+        } else {
+            const result = calculateScore(playerName, questions, answers);
+            displayScore(result);
+        }
+    }, 1200);
 }
 
   function displayScore(result: PlayerResult) {
