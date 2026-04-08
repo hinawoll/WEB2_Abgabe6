@@ -60,8 +60,8 @@ function groupByDifficulty(questions: Question[]) {
 
 /**
  * 5 Fragen zurückgeben
- * 1人分の問題を5問返す
- * Easy 2問, Medium 2問, Hard 1問
+ * Easy * 2, Medium * 2, Hard * 1
+ * because 5 questions cannot be evenly split across 3 difficulty levels
  */
 export function getQuestionsForPlayer(allQuestions: Question[]): Question[] {
   const { easy, medium, hard } = groupByDifficulty(allQuestions);
