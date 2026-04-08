@@ -1,5 +1,5 @@
-import { loadQuestions, getQuestionsForPlayer, Question } from './questions.js';
-import { calculateScore, saveResult, PlayerResult, loadResults } from "./module2.js";
+import { loadQuestions, getQuestionsForPlayer} from './questions.js';
+import { calculateScore, saveResult, PlayerResult, loadResults, Question} from "./module2.js";
 
 let questions: Question[] = [];
 let answers: string[] = [];

@@ -4,7 +4,7 @@ Punktebewertung: easy = 1, medium = 2, hard = 3, falsch = 0
 
 export type Difficulty = "easy" | "medium" | "hard";
 
-import interface Question {
+export interface Question {
   category: string;
   question: string;
   options: string[];
