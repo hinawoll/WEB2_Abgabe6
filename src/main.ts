@@ -20,8 +20,7 @@ async function restartGame(): Promise<void> {
   document.getElementById("points")!.innerHTML = "";
   document.getElementById("leaderboard")!.innerHTML = "";
 
-  document.getElementById("score")!.style.display = "none";
-  document.getElementById("LeaderboardTitel")!.style.display = "none";
+ 
 
   document.getElementById("options")!.innerHTML = "";
   document.getElementById("question")!.textContent = "";
