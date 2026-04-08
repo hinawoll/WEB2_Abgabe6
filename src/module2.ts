@@ -2,15 +2,7 @@
 Punktebewertung: easy = 1, medium = 2, hard = 3, falsch = 0
 */
 
-export type Difficulty = "easy" | "medium" | "hard";
-
-import interface Question {
-  category: string;
-  question: string;
-  options: string[];
-  answer: string;
-  difficulty: Difficulty;
-}
+import { Question, Difficulty } from './questions';
 
 export interface PlayerResult {
   playerName: string;
@@ -48,6 +40,7 @@ export function calculateScore(playerName: string, questions: Question[], userAn
   const percentage: number = (points/maxPoints) * 100
   return {playerName, points, maxPoints, percentage, correctAnswers}; //PlayerResult Objekt
 }
+
 
 export function saveResult(result: PlayerResult): void {
   const results = loadResults();

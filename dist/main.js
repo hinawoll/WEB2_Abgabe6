@@ -1,5 +1,5 @@
-import { loadQuestions, getQuestionsForPlayer } from './questions.js';
-import { calculateScore, saveResult, loadResults } from "./module2.js";
+import { loadQuestions, getQuestionsForPlayer } from './questions';
+import { calculateScore, saveResult, loadResults } from "./module2";
 let questions = [];
 let answers = [];
 let indexcount = 0;
