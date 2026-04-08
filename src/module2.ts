@@ -4,7 +4,7 @@ Punktebewertung: easy = 1, medium = 2, hard = 3, falsch = 0
 
 export type Difficulty = "easy" | "medium" | "hard";
 
-export interface Question {
+import interface Question {
   category: string;
   question: string;
   options: string[];
@@ -35,7 +35,7 @@ function getMaxPoints(questions: Question[]): number {
   return maxPoints;
 }
 
-export function calculateResult(playerName: string, questions: Question[], userAnswers: string[]): PlayerResult {
+export function calculateScore(playerName: string, questions: Question[], userAnswers: string[]): PlayerResult {
   let points: number = 0;
   let correctAnswers: number = 0;
   for(let i: number = 0; i < questions.length; i++){

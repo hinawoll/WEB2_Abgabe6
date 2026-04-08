@@ -39,7 +39,8 @@ function groupByDifficulty(questions) {
 }
 /**
  * 5 Fragen zurückgeben
- * Easy :2, Medium :2, Hard :1
+ * 1人分の問題を5問返す
+ * Easy 2問, Medium 2問, Hard 1問
  */
 export function getQuestionsForPlayer(allQuestions) {
     const { easy, medium, hard } = groupByDifficulty(allQuestions);
