@@ -6,7 +6,24 @@ let answers: string[] = [];
 let indexcount: number = 0;
 let playerName: string = "";
 
+function restartGame(): void {
+    indexcount = 0;
+    answers = [];
+    document.getElementById("points")!.innerHTML = "";
+    document.getElementById("leaderboard")!.innerHTML = "";
+    document.getElementById("options")!.innerHTML = "";
+    document.getElementById("question")!.textContent = "";
+  
+    document.getElementById("quiz-container")!.style.display = "none";
+    document.getElementById("player-input")!.style.display = "block";
+    document.getElementById("restartBtn")!.style.display = "none";
+  
+    const input = document.getElementById("username") as HTMLInputElement;
+    input.value = "";
+}
+
 async function initQuiz(): Promise<void>{
+    document.getElementById("restartBtn")!.addEventListener("click", restartGame);
     questions = getQuestionsForPlayer(await loadQuestions());
     document.getElementById("startBtn")!.addEventListener("click", () => {
         const input = document.getElementById("username") as HTMLInputElement;
@@ -73,10 +90,11 @@ function handleAnswer(index: number, selectedOption: string): void {
   const leaderboard = document.getElementById("leaderboard")!;
   leaderboard.innerHTML = "";
   saveResult(result); 
-  const allResults = loadResults();
+  const allResults = loadResults().sort((a, b) => b.points - a.points).slice(0, 5); //nur die besten 5
   allResults.forEach((res: PlayerResult) => {
       const li = document.createElement("li");
       li.textContent = res.playerName + ": " + res.points + "/" + res.maxPoints + " pts";
       leaderboard.appendChild(li);
   });
+  document.getElementById("restartBtn")!.style.display = "block";
 }
