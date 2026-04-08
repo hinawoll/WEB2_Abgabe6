@@ -1,5 +1,11 @@
-import { loadQuestions, getQuestionsForPlayer} from './questions.js';
-import { calculateScore, saveResult, PlayerResult, loadResults, Question} from "./module2.js";
+import { loadQuestions, getQuestionsForPlayer } from "./questions.js";
+import {
+  calculateScore,
+  saveResult,
+  PlayerResult,
+  loadResults,
+  Question,
+} from "./module2.js";
 
 let questions: Question[] = [];
 let answers: string[] = [];
@@ -7,51 +13,55 @@ let indexcount: number = 0;
 let playerName: string = "";
 
 async function restartGame(): Promise<void> {
-    indexcount = 0;
-    answers = [];
-    questions = getQuestionsForPlayer(await loadQuestions());
+  indexcount = 0;
+  answers = [];
+  questions = getQuestionsForPlayer(await loadQuestions());
 
-    document.getElementById("points")!.innerHTML = "";
-    document.getElementById("leaderboard")!.innerHTML = "";
-    document.getElementById("options")!.innerHTML = "";
-    document.getElementById("question")!.textContent = "";
+  document.getElementById("points")!.innerHTML = "";
+  document.getElementById("leaderboard")!.innerHTML = "";
 
-    document.getElementById("quiz-container")!.style.display = "none";
-    document.getElementById("player-input")!.style.display = "block";
-    document.getElementById("restartBtn")!.style.display = "none";
+  document.getElementById("score")!.style.display = "none";
+  document.getElementById("LeaderboardTitel")!.style.display = "none";
 
-    const input = document.getElementById("username") as HTMLInputElement;
-    input.value = "";
+  document.getElementById("options")!.innerHTML = "";
+  document.getElementById("question")!.textContent = "";
+
+  document.getElementById("quiz-container")!.style.display = "none";
+  document.getElementById("player-input")!.style.display = "block";
+  document.getElementById("restartBtn")!.style.display = "none";
+
+  const input = document.getElementById("username") as HTMLInputElement;
+  input.value = "";
 }
 
-async function initQuiz(): Promise<void>{
-    document.getElementById("restartBtn")!.addEventListener("click", restartGame);
-    questions = getQuestionsForPlayer(await loadQuestions());
-    document.getElementById("startBtn")!.addEventListener("click", () => {
-        const input = document.getElementById("username") as HTMLInputElement;
-        if (input.value.trim() === "") {
-        return;
-        }
-        playerName = input.value.trim();  
-        document.getElementById("player-input")!.style.display = "none";
-        document.getElementById("quiz-container")!.style.display = "block";
-        
-        displayQuestion(indexcount);  
-    });
+async function initQuiz(): Promise<void> {
+  document.getElementById("restartBtn")!.addEventListener("click", restartGame);
+  questions = getQuestionsForPlayer(await loadQuestions());
+  document.getElementById("startBtn")!.addEventListener("click", () => {
+    const input = document.getElementById("username") as HTMLInputElement;
+    if (input.value.trim() === "") {
+      return;
+    }
+    playerName = input.value.trim();
+    document.getElementById("player-input")!.style.display = "none";
+    document.getElementById("quiz-container")!.style.display = "block";
+
+    displayQuestion(indexcount);
+  });
 }
 initQuiz();
 
 export function displayQuestion(index: number): void {
-    let question = questions[index];
-    document.getElementById("question")!.textContent = question.question;
-    document.getElementById("options")!.innerHTML = "";
-    question.options.forEach((option: string | number)  => {
+  let question = questions[index];
+  document.getElementById("question")!.textContent = question.question;
+  document.getElementById("options")!.innerHTML = "";
+  question.options.forEach((option: string | number) => {
     const Option = document.createElement("button");
     Option.className = "btn btn-outline-primary btn-block mt-2";
     Option.textContent = option.toString();
 
     Option.addEventListener("click", () => {
-        handleAnswer(index, option.toString(), Option);
+      handleAnswer(index, option.toString(), Option);
     });
 
     document.getElementById("options")!.appendChild(Option);
@@ -73,40 +83,49 @@ export function displayQuestion(index: number): void {
     }
 }*/
 
-function handleAnswer(index: number, selectedOption: string, button: HTMLButtonElement): void {
-    document.querySelectorAll("#options button").forEach(btn => {
-        (btn as HTMLButtonElement).disabled = true;
-    }); //keine weiteren buttons drückbar während feedback
-    answers[index] = selectedOption;
+function handleAnswer(
+  index: number,
+  selectedOption: string,
+  button: HTMLButtonElement,
+): void {
+  document.querySelectorAll("#options button").forEach((btn) => {
+    (btn as HTMLButtonElement).disabled = true;
+  }); //keine weiteren buttons drückbar während feedback
+  answers[index] = selectedOption;
 
-    const isCorrect = questions[index].answer === selectedOption;
+  const isCorrect = questions[index].answer === selectedOption;
 
-    if (isCorrect) {
-        button.classList.remove("btn-outline-primary");
-        button.classList.add("btn-success");
+  if (isCorrect) {
+    button.classList.remove("btn-outline-primary");
+    button.classList.add("btn-success");
+  } else {
+    button.classList.remove("btn-outline-primary");
+    button.classList.add("btn-danger");
+  }
+
+  setTimeout(() => {
+    indexcount++;
+
+    if (indexcount < questions.length) {
+      displayQuestion(indexcount);
     } else {
-        button.classList.remove("btn-outline-primary");
-        button.classList.add("btn-danger");
+      const result = calculateScore(playerName, questions, answers);
+      displayScore(result);
     }
-
-    setTimeout(() => {
-        indexcount++;
-
-        if (indexcount < questions.length) {
-            displayQuestion(indexcount);
-        } else {
-            const result = calculateScore(playerName, questions, answers);
-            displayScore(result);
-        }
-    }, 1200);
+  }, 1200);
 }
 
-  function displayScore(result: PlayerResult) {
+function displayScore(result: PlayerResult) {
   const pointsList = document.getElementById("points")!;
   pointsList.innerHTML = "";
-
   const li1 = document.createElement("li");
-  li1.textContent = result.playerName + ": " + result.correctAnswers + "/" + questions.length + " correct";
+  li1.textContent =
+    result.playerName +
+    ": " +
+    result.correctAnswers +
+    "/" +
+    questions.length +
+    " correct";
   pointsList.appendChild(li1);
 
   const li2 = document.createElement("li");
@@ -119,12 +138,16 @@ function handleAnswer(index: number, selectedOption: string, button: HTMLButtonE
 
   const leaderboard = document.getElementById("leaderboard")!;
   leaderboard.innerHTML = "";
-  saveResult(result); 
-  const allResults = loadResults().sort((a, b) => b.points - a.points).slice(0, 5); //nur die besten 5
+  saveResult(result);
+  const allResults = loadResults()
+    .sort((a, b) => b.points - a.points)
+    .slice(0, 5); //nur die besten 5
   allResults.forEach((res: PlayerResult) => {
-      const li = document.createElement("li");
-      li.textContent = res.playerName + ": " + res.points + "/" + res.maxPoints + " pts";
-      leaderboard.appendChild(li);
+    const li = document.createElement("li");
+    li.textContent =
+      res.playerName + ": " + res.points + "/" + res.maxPoints + " pts";
+    leaderboard.appendChild(li);
   });
+
   document.getElementById("restartBtn")!.style.display = "block";
 }
